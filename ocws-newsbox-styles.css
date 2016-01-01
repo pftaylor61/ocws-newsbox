@@ -1,0 +1,18 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Dec 31, 2015, 7:29:05 PM
+    Author     : Paul
+*/
+
+.ocwsnb_newsbox {
+    background-color: #dddddd;
+    border:0.1em solid black;
+    border-radius: 1em;
+    text-align: left;
+    max-width: 25%;
+    padding: 0.8em;
+}
