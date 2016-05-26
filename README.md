@@ -4,6 +4,7 @@
 The idea behind this plugin is to create little newsboxes that can be inserted into any page or post. These are particularly useful on the Front Page of a website, enabling the user to change a news announcement, without re-editing the whole page.
 
 ## Shortcode
+<<<<<<< HEAD
 The shortcode should look like this.
 
 [newsbox nbid='172']
@@ -11,6 +12,12 @@ The shortcode should look like this.
 ## Version 0.2
 Some adjustments made to the styling. However, I still cannot get the columns to work.
 
+=======
+The shortcode to be added to a post looks like this.
+
+[newsbox nbid='172']
+
+>>>>>>> origin/master
 ## Version 0.1
 I have got most of the plugin to work. In fact, all the important bits work. The custom post type for the newsboxes works. They are easy to edit. The shortcode works.
 
