@@ -3,7 +3,7 @@
     Plugin Name: OCWS Newsbox
     Description: This plugin creates a little box on the page, with a small announcement or news item in it. It is achieved by a custom post type. each newsbox entry has its own shortcode. The shortcode must be in the form <code>[newsbox nbid='172']</code>, where the number is the id number of the newsbox post.
     Author: Paul Taylor
-    Version: 0.2
+    Version: 0.2.1
     Plugin URI: http://oldcastleweb.com/pws/plugins
     Author URI: http://oldcastleweb.com/pws/about
     License: GPL2
@@ -66,6 +66,11 @@ if (!function_exists('ocwsnb_newsbox_output')){
         
         $content_post = get_post($atts['nbid']);
         $content = $content_post->post_content;
+        $content = trim($content);
+        $nopost = false;
+        if ($content=="") {
+            $nopost=true;
+        }
         $title = $content_post->post_title;
         $title = trim($title);
         if ($title=="") {
@@ -74,10 +79,16 @@ if (!function_exists('ocwsnb_newsbox_output')){
         $content = apply_filters('the_content', $content);
         $content = str_replace(']]>', ']]&gt;', $content);
         
+        $contenttype = $content_post->post_type;
+        
+        if (($nopost) || ($contenttype != "ocwsnb_newsbox")) {
+            $newsbox = "";
+        } else {
         $newsbox = '<div id="ocwsnb_'.$atts['nbid'].'" class="ocwsnb_newsbox">';
         $newsbox .= '<strong>'.$title.':</strong><br />';
         $newsbox .= $content;
         $newsbox .= '</div><!-- end div ocwsnb_'.$atts['nbid'].' -->';
+        }
         
         return $newsbox;
     } // end function ocwsnb_newsbox_output

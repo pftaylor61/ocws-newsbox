@@ -8,6 +8,11 @@ The shortcode should look like this.
 
 [newsbox nbid='172']
 
+## Versio 0.3
+A routine was added to check if the post type was a Newsbox. If not, nothing is displayed.
+
+Also, if the content of the Newsbox is empty, nothing is displayed. This means that a Newsbox shortcode could be left in place on a page, and the news changed, or, occasionally, left blank.
+
 ## Version 0.2
 Some adjustments made to the styling. However, I still cannot get the columns to work.
 
