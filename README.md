@@ -4,7 +4,6 @@
 The idea behind this plugin is to create little newsboxes that can be inserted into any page or post. These are particularly useful on the Front Page of a website, enabling the user to change a news announcement, without re-editing the whole page.
 
 ## Shortcode
-<<<<<<< HEAD
 The shortcode should look like this.
 
 [newsbox nbid='172']
