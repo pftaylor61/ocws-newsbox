@@ -1,9 +1,9 @@
 <?php
 /*
     Plugin Name: OCWS Newsbox
-    Description: This plugin creates a little box on the page, with a small announcement or news item in it. It is achieved by a custom post type. each newsbox entry has its own shortcode.
+    Description: This plugin creates a little box on the page, with a small announcement or news item in it. It is achieved by a custom post type. each newsbox entry has its own shortcode. The shortcode must be in the form <code>[newsbox nbid='172']</code>, where the number is the id number of the newsbox post.
     Author: Paul Taylor
-    Version: 0.1
+    Version: 0.2
     Plugin URI: http://oldcastleweb.com/pws/plugins
     Author URI: http://oldcastleweb.com/pws/about
     License: GPL2
@@ -66,11 +66,16 @@ if (!function_exists('ocwsnb_newsbox_output')){
         
         $content_post = get_post($atts['nbid']);
         $content = $content_post->post_content;
+        $title = $content_post->post_title;
+        $title = trim($title);
+        if ($title=="") {
+            $title="Newsbox";
+        }
         $content = apply_filters('the_content', $content);
         $content = str_replace(']]>', ']]&gt;', $content);
         
         $newsbox = '<div id="ocwsnb_'.$atts['nbid'].'" class="ocwsnb_newsbox">';
-        $newsbox .= '<strong>Newsbox:</strong><br />';
+        $newsbox .= '<strong>'.$title.':</strong><br />';
         $newsbox .= $content;
         $newsbox .= '</div><!-- end div ocwsnb_'.$atts['nbid'].' -->';
         
@@ -79,12 +84,25 @@ if (!function_exists('ocwsnb_newsbox_output')){
 } // end if (protecting ocwsnb_newsbox_output)
 
 add_shortcode( 'newsbox', 'ocwsnb_newsbox_output' );
+// shortcode looks like this: [newsbox nbid='172']
 
 //----------------edit custom columns display for back-end
 add_action("manage_ocwsnewsbox_posts_custom_column", "my_custom_columns");
 add_filter("manage_edit-ocwsnewsbox_columns", "my_newsbox_columns");
+add_action( 'add_meta_boxes', 'ocwsnb_add_shortcode_metabox' );
+
+// Add the Shortcode Meta Box
+
+function ocwsnb_add_shortcode_metabox() {
+	add_meta_box('ocwsnb_shortcode', 'Shortcode', 'ocwsnb_shortcode', OCWSNB_SLUG, 'side', 'default');
+}
+
+function ocwsnb_shortcode() {
+	global $post;
+	echo $post->ID;
+}
  
-function my_newsbox_columns($columns) //this function display the columns headings
+function my_newsbox_columns() //this function display the columns headings
 {
     $columns2 = array(
         "cb" => "<input type=\"checkbox\" />",
