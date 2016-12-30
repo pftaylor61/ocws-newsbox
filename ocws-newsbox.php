@@ -3,7 +3,7 @@
     Plugin Name: OCWS Newsbox
     Description: This plugin creates a little box on the page, with a small announcement or news item in it. It is achieved by a custom post type. each newsbox entry has its own shortcode. The shortcode must be in the form <code>[newsbox nbid='172']</code>, where the number is the id number of the newsbox post.
     Author: Paul Taylor
-    Version: 0.2.1
+    Version: 0.4
     Plugin URI: http://oldcastleweb.com/pws/plugins
     Author URI: http://oldcastleweb.com/pws/about
     License: GPL2
@@ -41,6 +41,20 @@ function ocwsnb_init() {
 					'parent_item_colon' => __( 'Parent '.OCWSNB_NAME_SG.':', OCWSNB_SLUG ),
 					'menu_name' => __( OCWSNB_NAME_PL, OCWSNB_SLUG ),
                          ),
+        'show_ui' => true,
+	'capability_type' => OCWSNB_SLUG,
+        'capabilities' => array(
+					'publish_posts' => 'publish_'.OCWSNB_SLUG.'s',
+					'edit_posts' => 'edit_'.OCWSNB_SLUG.'s',
+					'edit_others_posts' => 'edit_others_'.OCWSNB_SLUG.'s',
+					'delete_posts' => 'delete_'.OCWSNB_SLUG.'s',
+					'delete_others_posts' => 'delete_others_'.OCWSNB_SLUG.'s',
+					'read_private_posts' => 'read_private_'.OCWSNB_SLUG.'s',
+					'edit_post' => 'edit_'.OCWSNB_SLUG,
+					'delete_post' => 'delete_'.OCWSNB_SLUG,
+					'read_post' => 'read_'.OCWSNB_SLUG,
+				), 
+        'map_meta_cap' => true,
         'menu_icon'   => 'dashicons-testimonial',
         'show_ui' => true,
         'supports' => array(
@@ -85,7 +99,7 @@ if (!function_exists('ocwsnb_newsbox_output')){
             $newsbox = "";
         } else {
         $newsbox = '<div id="ocwsnb_'.$atts['nbid'].'" class="ocwsnb_newsbox">';
-        $newsbox .= '<strong>'.$title.':</strong><br />';
+        $newsbox .= '<h3>'.$title.':</h3>';
         $newsbox .= $content;
         $newsbox .= '</div><!-- end div ocwsnb_'.$atts['nbid'].' -->';
         }

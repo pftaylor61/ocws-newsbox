@@ -8,7 +8,10 @@ The shortcode should look like this.
 
 [newsbox nbid='172']
 
-## Versio 0.3
+## Version 0.4
+Capabilities have been added, in order to restrict editing for certain user roles.
+
+## Version 0.3
 A routine was added to check if the post type was a Newsbox. If not, nothing is displayed.
 
 Also, if the content of the Newsbox is empty, nothing is displayed. This means that a Newsbox shortcode could be left in place on a page, and the news changed, or, occasionally, left blank.
